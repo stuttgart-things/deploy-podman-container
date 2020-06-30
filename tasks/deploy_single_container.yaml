@@ -1,0 +1,30 @@
+- name: check if service file is already existing
+  stat:
+    path: "{{ service_files_dir }}/{{ service_name }}"
+  register: service_file_before_template
+
+- name: ensure "{{ service_name }}" is stopped
+  service:
+    name: "{{ service_name }}"
+    state: stopped
+    enabled: no
+  when:
+    - service_file_before_template.stat.exists
+
+- name: pull container image
+  command: "podman pull {{ container_image }}"
+
+- name: "create systemd service file for container: {{ container_name }}"
+  template:
+    src: systemd-service-single-container.j2
+    dest: "{{ service_files_dir }}/{{ service_name }}"
+    owner: root
+    group: root
+    mode: 0644
+    notify: reload systemctl
+
+- name: "ensure service is enabled at boot, and systemd reloaded"
+  systemd:
+    name: "{{ service_name }}"
+    enabled: yes
+    daemon_reload: yes
