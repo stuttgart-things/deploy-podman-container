@@ -9,4 +9,6 @@
       vars: 
         container_name: loadbalancer
         container_image: nginx:1.17
+        container_run_args: >-
+          -p 8080:80
         #container_cmd_args: 
