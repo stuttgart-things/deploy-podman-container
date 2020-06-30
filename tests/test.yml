@@ -7,7 +7,7 @@
 
     - role: deploy-podman-container
       vars: 
-        container_name: webserver
+        container_name: webserver3
         container_image: nginx:latest
         mounts:
           webserverconfig:
