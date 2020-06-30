@@ -18,8 +18,7 @@ ExecStart=/usr/bin/podman run \
 {% if mounts is defined %}
 {% for mount in mounts.values()%}
 -v {{ mount.host }}:{{ mount.container }} \
-{% endfor %}
-{% endif %} 
+{% endfor %}{% endif %} 
 --conmon-pidfile {{ pidfile }} \
 --cidfile {{ cidfile }} \
 {{ container_image }} {% if container_cmd_args is defined %} \
