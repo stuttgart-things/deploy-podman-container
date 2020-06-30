@@ -1,0 +1,7 @@
+- src: git@codehub.sva.de:Lab/stuttgart-things/ansible/base-os-setup.git
+  scm: git
+- src: git@codehub.sva.de:Lab/stuttgart-things/ansible/install-configure-podman.git
+  scm: git
+- src: git@codehub.sva.de:Lab/stuttgart-things/kubernetes/deploy-podman-container.git
+  scm: git
+ 

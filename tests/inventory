@@ -1,2 +1,1 @@
-localhost
-
+10.100.136.144 ansible_user=root

@@ -1,2 +1,13 @@
 ---
 # tasks file for deploy-podman-container
+
+- name: "create systemd service file for container: {{ container_name }}"
+  template:
+    src: systemd-service-single.j2
+    dest: "{{ service_files_dir }}/{{ service_name }}"
+    owner: root
+    group: root
+    mode: 0644
+  notify: reload systemctl
+  register: service_file
+  when: container_image is defined

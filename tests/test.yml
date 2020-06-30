@@ -1,5 +1,7 @@
 ---
 - hosts: localhost
-  remote_user: root
+  become: true
   roles:
-    - deploy-podman-container
+    - base-os-setup
+    - install-configure-podman 
+  #  - deploy-podman-container
