@@ -14,7 +14,7 @@ ExecStart=/usr/bin/podman run --name {{ container_name }} \
   {{ container_image }} {% if container_cmd_args is defined %} \
   {{ container_cmd_args }} {% endif %}  {% if ports is defined %}
         {% for port in ports %}
-         -v {{ item.value.host }}:{{ item.value.container }}
+         -v {{ port.value.host }}:{{ port.value.container }}
         {% endfor %} 
     {% endif %}
 
