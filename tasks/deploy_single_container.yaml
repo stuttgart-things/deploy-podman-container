@@ -21,7 +21,6 @@
     owner: root
     group: root
     mode: 0644
-    notify: reload systemctl
 
 - name: "ensure service is enabled at boot, and systemd reloaded"
   systemd:

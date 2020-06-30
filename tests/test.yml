@@ -7,8 +7,8 @@
 
     - role: deploy-podman-container
       vars: 
-        container_name: helloworld
-        container_image: hello-world:latest
+        container_name: webserver
+        container_image: nginx:latest
         container_run_args: >-
           -p 8080:80
         #container_cmd_args: 
