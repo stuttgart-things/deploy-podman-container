@@ -11,3 +11,9 @@
   notify: reload systemctl
   register: service_file
   when: container_image is defined
+
+ - name: ensure "{{ service_name }}" is enabled at boot, and systemd reloaded
+   systemd:
+    name: "{{ service_name }}"
+    enabled: yes
+    daemon_reload: yes

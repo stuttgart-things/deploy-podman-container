@@ -1,7 +1,12 @@
 ---
-- hosts: localhost
+- hosts: all
   become: true
   roles:
     - base-os-setup
-    - install-configure-podman 
-  #  - deploy-podman-container
+    - install-configure-podman
+
+    - role: deploy-podman-container
+      vars: 
+        container_name: loadbalancer
+        container_image: nginx:1.17
+        #container_cmd_args: 

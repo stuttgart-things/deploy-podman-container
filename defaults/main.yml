@@ -1,2 +1,18 @@
 ---
 # defaults file for deploy-podman-container
+
+# user
+container_run_as_user: root
+container_run_as_group: root
+
+# systemd service 
+service_files_dir: /etc/systemd/system
+service_name: "{{ container_name }}-container-pod.service"
+systemd_TimeoutStartSec: 15
+systemd_RestartSec: 30
+cidfile: "/tmp/{{ service_name }}.cid"
+pidfile: "/tmp/{{ service_name }}.pid"
+
+# container
+container_restart: on-failure
+container_stop_timeout: 15
