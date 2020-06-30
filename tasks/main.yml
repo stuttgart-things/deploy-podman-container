@@ -8,7 +8,7 @@
     owner: root
     group: root
     mode: 0644
-#   notify: reload systemctl
+    notify: start service
 
 - name: "ensure service is enabled at boot, and systemd reloaded"
   systemd:
