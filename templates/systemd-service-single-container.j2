@@ -8,10 +8,11 @@ TimeoutStartSec={{ systemd_TimeoutStartSec }}
 ExecStartPre=-/usr/bin/rm -f {{ pidfile }} {{ cidfile }}
 User={{ container_run_as_user }}
 
-ExecStart=/usr/bin/podman run --name {{ container_name }} \
-  {{ container_run_args }} \
-  --conmon-pidfile  {{ pidfile }} --cidfile {{ cidfile }} \
-  {% if ports is defined %} {% for port in ports.values() %}-v {{ port.host }}:{{ port.container }} {% endfor %}{% endif %} \
+ExecStart=/usr/bin/podman run \
+  --name {{ container_name }} \
+  --conmon-pidfile  {{ pidfile }} \
+  --cidfile {{ cidfile }} \
+  {% if ports is defined %} {% for port in ports.values() %}-p {{ port.host }}:{{ port.container }} {% endfor %}{% endif %} \
   {{ container_image }} {% if container_cmd_args is defined %} \
   {{ container_cmd_args }} {% endif %}  
 
