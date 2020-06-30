@@ -9,6 +9,12 @@
       vars: 
         container_name: webserver
         container_image: nginx:latest
+        volume_mounts:
+          - host: /etc, container: 
+        ports:
+          - host: 8080, container: 80
+          - host: 8443, container: 443
+          
         container_run_args: >-
           -p 8080:80
         #container_cmd_args: 
