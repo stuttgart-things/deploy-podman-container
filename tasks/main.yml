@@ -1,6 +1,9 @@
 ---
 # tasks file for deploy-podman-container
 
+- name: pull container image
+  command: "podman pull {{ container_image }}"
+
 - name: "create systemd service file for container: {{ container_name }}"
   template:
     src: systemd-service-single-container.j2
@@ -8,7 +11,7 @@
     owner: root
     group: root
     mode: 0644
-    notify: start service
+    notify: reload systemctl
 
 - name: "ensure service is enabled at boot, and systemd reloaded"
   systemd:
