@@ -10,7 +10,7 @@
     mode: 0644
   notify: reload systemctl
 
- - name: ensure "{{ service_name }}" is enabled at boot, and systemd reloaded
+ - name: "ensure service is enabled at boot, and systemd reloaded"
    systemd:
      name: "{{ service_name }}"
      enabled: yes
