@@ -7,7 +7,7 @@
 
     - role: deploy-podman-container
       vars: 
-        container_name: ende4
+        container_name: ende100
         container_image: nginx:latest
         mounts:
           webserverconfig:
