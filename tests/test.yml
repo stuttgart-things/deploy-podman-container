@@ -9,7 +9,7 @@
       vars: 
         container_run_args: >-
           -d
-        container_name: talking
+        container_name: talking1
         container_image: nginx:latest
         mounts:
           webserverconfig:
