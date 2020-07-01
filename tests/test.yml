@@ -2,8 +2,8 @@
 - hosts: all
   become: true
   roles:
-    - base-os-setup
-    - install-configure-podman
+    # - base-os-setup
+    # - install-configure-podman
 
     - role: deploy-podman-container
       vars: 
@@ -11,8 +11,8 @@
         container_image: nginx:latest
         mounts:
           webserverconfig:
-            host: /tmp
-            container: /tmp:Z
+            host: /tmp/test
+            container: test:Z
         ports:
           http:
             host: 8080

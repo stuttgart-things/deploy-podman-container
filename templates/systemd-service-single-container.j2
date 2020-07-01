@@ -9,6 +9,8 @@ ExecStartPre=-/usr/bin/rm -f {{ pidfile }} {{ cidfile }}
 User={{ container_run_as_user }}
 
 ExecStart=/usr/bin/podman run \
+{% if container_run_args is defined %} 
+{{ container_run_args }} \{% endif %}
 --name {{ container_name }} \
 {% if ports is defined %}{% for port in ports.values() %}
 -p {{ port.host }}:{{ port.container }} \
@@ -16,7 +18,7 @@ ExecStart=/usr/bin/podman run \
 {% if mounts is defined %}{% for mount in mounts.values() %}
 -v {{ mount.host }}:{{ mount.container }} \
 {% endfor %}{% endif %}
---conmon-pidfile  {{ pidfile }} \
+--conmon-pidfile {{ pidfile }} \
 --cidfile {{ cidfile }} \
 {{ container_image }} {% if container_cmd_args is defined %} \
 {{ container_cmd_args }} {% endif %}  
