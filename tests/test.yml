@@ -7,7 +7,7 @@
 
     - role: deploy-podman-container
       vars: 
-        container_name: tempting
+        container_name: ende
         container_image: nginx:latest
         mounts:
           webserverconfig:
