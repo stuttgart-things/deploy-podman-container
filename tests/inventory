@@ -1,1 +1,1 @@
-10.100.136.71. ansible_user=root
+10.100.136.71 ansible_user=root
