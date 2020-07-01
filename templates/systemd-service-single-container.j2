@@ -10,7 +10,7 @@ User={{ container_run_as_user }}
 
 ExecStart=/usr/bin/podman run \
 --name {{ container_name }} \
-{% if ports is defined %}{% for port in ports.values() %}-p {{ port.host }}:{{ port.container }} {% endfor %}{% endif %} \
+{% if ports is defined %}{% for port in ports.values() %}-p {{ port.host }}:{{ port.container }} \{% endfor %}{% endif %}
 {% if mounts is defined %}{% for mount in mounts.values() %}-v {{ mount.host }}:{{ mount.container }}{% endfor %}{% endif %} \
 --conmon-pidfile  {{ pidfile }} \
 --cidfile {{ cidfile }} \
