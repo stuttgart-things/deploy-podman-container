@@ -1,7 +1,7 @@
 deploy-podman-conatiner
 =======================
 
-deploys reboot resistant podamn containers on target systems. 
+deploys reboot resistant podman containers.
 
 Requirements
 ------------
@@ -38,7 +38,7 @@ Example Playbook for a root container
         #container_cmd_args: 
 ```
 
-Role Requirements 7 Dependencies
+Role Requirements / Dependencies
 --------------------------------
 
 ```
@@ -61,5 +61,6 @@ BSD
 Author Information
 ------------------
 
-Patrick Hermann (patrick.hermann@sva.de), SVA GmbH, 07/2020
+Patrick Hermann (patrick.hermann@sva.de), SVA GmbH, 07/2020.
+
 this role was heavily influenced by [podman-container-systemd](https://github.com/ikke-t/podman-container-systemd) - but we didnt like the style of the role and for a better understanding for podman from a technology side, we're still in the process to rewrite/implement a similar role. 
