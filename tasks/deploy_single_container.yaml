@@ -32,7 +32,7 @@
 - name: ensure container's exposed ports firewall state
   tags: firewall
   firewalld:
-    port: "{{ port.host }}/tcp"
+    port: "{{ item.host }}/tcp"
     permanent: yes
     immediate: yes
   with_items: "{{ ports.values() }}"
