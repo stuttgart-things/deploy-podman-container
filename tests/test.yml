@@ -9,12 +9,12 @@
       vars: 
         container_run_args: >-
           -d
-        container_name: talking1
+        container_name: talking6
         container_image: nginx:latest
         mounts:
           webserverconfig:
             host: /tmp/test
-            container: test:Z
+            container: /test:Z
         ports:
           http:
             host: 8080

@@ -28,3 +28,12 @@
     enabled: yes
     state: started
     daemon_reload: yes
+
+- name: ensure container's exposed ports firewall state
+  tags: firewall
+  firewalld:
+    port: "{{ port.host }}/tcp"
+    permanent: yes
+    immediate: yes
+  with_items: "{{ ports.values() }}"
+
