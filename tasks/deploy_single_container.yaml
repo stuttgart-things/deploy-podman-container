@@ -35,5 +35,6 @@
     port: "{{ item.host }}/tcp"
     permanent: yes
     immediate: yes
+    state: enabled
   with_items: "{{ ports.values() }}"
 
