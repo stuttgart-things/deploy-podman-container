@@ -63,4 +63,4 @@ Author Information
 
 Patrick Hermann (patrick.hermann@sva.de), SVA GmbH, 07/2020.
 
-this role is heavily influenced by [podman-container-systemd](https://github.com/ikke-t/podman-container-systemd) - but we didnt like the style of the role and for a better understanding for podman from a technology side, we're still in the process to rewrite/implement a similar role. 
+this role is heavily influenced by [podman-container-systemd](https://github.com/ikke-t/podman-container-systemd) - we didnt like the style of the role and for a better understanding for podman from a technology side, we're still in the process to rewrite/implement a similar role. 
