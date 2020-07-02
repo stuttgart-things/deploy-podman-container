@@ -1,31 +1,57 @@
-Role Name
-=========
+deploy-podman-conatiner
+=======================
 
-A brief description of the role goes here.
+deploys reboot resistant podamn containers on target systems. 
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+or any other system w/ installed podman, systemd + firewalld. e.g. CentOs8.
 
-Role Variables
---------------
+Example Playbook for a root container 
+-------------------------------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+```
+---
+- hosts: loadbalancer
+  become: true
+  roles:
+    - base-os-setup # installs basic os setup + updates packages
+    - install-configure-podman # installs podman, buildah + skopeo
+    - role: deploy-podman-container
+      vars: 
+        container_name: rancher-loadbalancer
+        container_image: nginx:latest
+        container_run_args: >-
+          -d
+        mounts:
+          webserverconfig:
+            host: /tmp/test
+            container: /test:Z
+        ports:
+          http:
+            host: 80
+            container: 80
+          https:
+            host: 443
+            container: 443  
+        #container_cmd_args: 
+```
 
-Dependencies
-------------
+Role Requirements 7 Dependencies
+--------------------------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
-
-Example Playbook
-----------------
-
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+```
+sudo cat <<EOF > ./requirements.yaml
+- src: git@codehub.sva.de:Lab/stuttgart-things/ansible/base-os-setup.git
+  scm: git
+- src: git@codehub.sva.de:Lab/stuttgart-things/ansible/install-configure-podman.git
+  scm: git
+- src: git@codehub.sva.de:Lab/stuttgart-things/kubernetes/deploy-podman-container.git
+  scm: git
+EOF
+ansible-galaxy install -r ./requirements.yaml --force
+```
 
 License
 -------
@@ -35,4 +61,5 @@ BSD
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Patrick Hermann (patrick.hermann@sva.de), SVA GmbH, 07/2020
+this role was heavily influenced by [podman-container-systemd](https://github.com/ikke-t/podman-container-systemd) - but we didnt like the style of the role and for a better understanding for podman from a technology side, we're still in the process to rewrite/implement a similar role. 

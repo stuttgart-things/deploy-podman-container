@@ -7,20 +7,20 @@
 
     - role: deploy-podman-container
       vars: 
+        container_name: rancher-loadbalancer
+        container_image: nginx:latest
         container_run_args: >-
           -d
-        container_name: talking6
-        container_image: nginx:latest
         mounts:
           webserverconfig:
             host: /tmp/test
             container: /test:Z
         ports:
           http:
-            host: 8080
+            host: 80
             container: 80
           https:
-            host: 8443
+            host: 443
             container: 443  
 
         #container_cmd_args: 
