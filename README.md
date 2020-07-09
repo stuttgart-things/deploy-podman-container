@@ -28,6 +28,10 @@ Example Playbook for a root container
           webserverconfig:
             host: /tmp/test
             container: /test:Z
+        env_vars:
+          hostname:
+            key: INGRESS_HTTP
+            value: master0.openshift.example
         ports:
           http:
             host: 80
