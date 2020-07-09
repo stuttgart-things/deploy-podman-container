@@ -13,6 +13,9 @@ ExecStart=/usr/bin/podman run {% if container_run_args is defined %}{{ container
 {% if ports is defined %}{% for port in ports.values() %}
 -p {{ port.host }}:{{ port.container }} \
 {% endfor %}{% endif %}
+{% if env_vars is defined %}{% for env in env_vars.values() %}
+-p {{ env.key }}:{{ env.value }} \
+{% endfor %}{% endif %}
 {% if mounts is defined %}{% for mount in mounts.values() %}
 -v {{ mount.host }}:{{ mount.container }} \
 {% endfor %}{% endif %}
