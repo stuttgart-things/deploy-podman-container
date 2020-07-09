@@ -38,3 +38,10 @@
     state: enabled
   with_items: "{{ ports.values() }}"
 
+- name: create local mount dirs (if defined)
+  tags: mounts
+  file:
+    path: "{{ item.host }}/tcp"
+    state: directory
+    recurse: yes
+  with_items: "{{ ports.values() }}"
