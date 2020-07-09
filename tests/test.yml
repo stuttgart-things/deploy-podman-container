@@ -15,6 +15,13 @@
           webserverconfig:
             host: /tmp/test
             container: /test:Z
+        env_vars:
+          hostname:
+            key: HOSTNAME
+            value: horst
+          location:
+            key: LOCATION
+            value: stuttgart
         ports:
           http:
             host: 80
