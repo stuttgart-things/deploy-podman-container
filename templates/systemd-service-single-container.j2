@@ -3,6 +3,7 @@ Description={{ container_name }} Podman Container
 After=network.target
 
 [Service]
+Restart={{ restart_policy }}
 Type=simple
 TimeoutStartSec={{ systemd_TimeoutStartSec }}
 ExecStartPre=-/usr/bin/rm -f {{ pidfile }} {{ cidfile }}
