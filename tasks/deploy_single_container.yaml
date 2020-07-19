@@ -17,7 +17,7 @@
 - name: create local mount dirs (if defined)
   tags: mounts
   file:
-    path: "{{ item.host }}"
+    path: "{{ item.host | dirname }}"
     state: directory
     recurse: yes
   with_items: "{{ mounts.values() }}"
