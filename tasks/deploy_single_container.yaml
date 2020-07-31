@@ -17,10 +17,10 @@
 - name: create local mount dirs (if defined)
   tags: mounts
   file:
-    path: "{{ item.host | dirname }}"
+    path: "{{ item.value.host | dirname }}"
     state: directory
     recurse: yes
-  with_items: "{{ mounts.values() }}"
+  loop: "{{ lookup('dict', mounts) }}"
   when: mounts is defined
 
 - name: "create systemd service file for container: {{ container_name }}"
@@ -41,9 +41,9 @@
 - name: ensure container's exposed ports firewall state
   tags: firewall
   firewalld:
-    port: "{{ item.host }}/tcp"
+    port: "{{ item.value.host }}/tcp"
     permanent: yes
     immediate: yes
     state: enabled
-  with_items: "{{ ports.values() }}"
+  loop: "{{ lookup('dict', ports) }}"
   when: ports is defined
