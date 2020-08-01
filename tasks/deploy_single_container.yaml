@@ -20,7 +20,7 @@
     path: "{{ item.value.host | dirname }}"
     state: directory
     recurse: yes
-  loop: "{{ lookup('dict', mounts) }}"
+  loop: "{{ lookup('dict', mounts, wantlist=True) }}"
   when: mounts is defined
 
 - name: "create systemd service file for container: {{ container_name }}"
@@ -45,5 +45,5 @@
     permanent: yes
     immediate: yes
     state: enabled
-  loop: "{{ lookup('dict', ports) }}"
+  loop: "{{ lookup('dict', ports, wantlist=True) }}"
   when: ports is defined
