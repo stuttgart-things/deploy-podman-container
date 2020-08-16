@@ -1,8 +1,8 @@
 - name: Prepare deployment
   include: prepare-deployment.yaml
 
-- name: Run podman container 
-  include: run-podman-container.yaml
+# - name: Run podman container 
+#   include: run-podman-container.yaml
 
 # - name: Enable systemd service
 #   include: deploy-systemd-service.yaml

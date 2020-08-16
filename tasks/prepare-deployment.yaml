@@ -18,6 +18,16 @@
     port_list: "{{ port_list | default([]) + [current_port] }}"
   loop: "{{ lookup('dict', ports, wantlist=True) }}"
 
+- name: Populate dict
+  set_fact:
+    env_vars_dict: "{{ env_vars_dict|default({}) | combine( {item.value.key: item.value.value} ) }}"
+  with_items:
+    - "{{ lookup('dict', env_vars, wantlist=True) }}"
+
+- name: debug
+  debug:
+    var: env_vars_dict
+
 # - name: Calculate list of envs to launch container
 #   set_fact:
 #     env_list: '{{ env_list|default([]) + [ {{ item.value.key | upper }}: "{{ item.value.value }}" ] }}'
