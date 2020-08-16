@@ -28,5 +28,4 @@
     state: "{{ state }}"
     recreate: "{{ recreate }}"
     ports: 
-      - "{{ item.host }}:{{ item.container }}"
-  loop: "{{ ports.values() | list }}"
+      - "{{ ports.values() | list }}"
