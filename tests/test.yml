@@ -2,9 +2,6 @@
 - hosts: all
   become: true
   roles:
-    # - base-os-setup
-    # - install-configure-podman
-
     - role: deploy-podman-container
       vars: 
         container_name: env-test2
@@ -30,4 +27,3 @@
             host: 444
             container: 443  
 
-        #container_cmd_args: 

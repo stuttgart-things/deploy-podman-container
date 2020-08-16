@@ -47,16 +47,18 @@ Role Requirements / Dependencies
 
 ```
 sudo cat <<EOF > ./requirements.yaml
-- src: git@codehub.sva.de:Lab/stuttgart-things/ansible/base-os-setup.git
-  scm: git
+roles:
 - src: git@codehub.sva.de:Lab/stuttgart-things/ansible/install-configure-podman.git
   scm: git
 - src: git@codehub.sva.de:Lab/stuttgart-things/kubernetes/deploy-podman-container.git
   scm: git
+- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-requirements.git
+  scm: git
 collections:
-- name: containers.podman
+- name: containers.podman 
 EOF
 ansible-galaxy install -r ./requirements.yaml --force
+ansible-galaxy collection install -r meta/requirements.yaml -f
 ```
 
 License

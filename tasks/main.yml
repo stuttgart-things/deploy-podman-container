@@ -3,6 +3,9 @@
     name: install-configure-podman
   tags: setup
 
-- name: Deploy single container
-  include: deploy_single_container.yaml
+- name: Run podman container 
+  include: run-podman-container.yaml
+
+# - name: Enable systemd service
+#   include: deploy-systemd-service.yaml
 
