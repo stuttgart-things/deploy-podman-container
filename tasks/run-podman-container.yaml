@@ -28,6 +28,5 @@
     #command: redis-server --appendonly yes
     state: "{{ state }}"
     recreate: "{{ recreate }}"
-    ports:
-      - "{{ item.value.host }}:{{ item.value.container }}"
-  with_items: "{{ lookup('dict', ports, wantlist=True) }}"
+    ports: "{{ item.value.host }}:{{ item.value.container }}"
+  loop: "{{ lookup('dict', ports, wantlist=True) }}"
