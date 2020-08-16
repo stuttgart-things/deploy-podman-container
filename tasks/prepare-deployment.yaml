@@ -19,6 +19,7 @@
   loop: "{{ lookup('dict', ports, wantlist=True) }}"
   when: ports is defined and ports.values()|length > 0
 
+- name: Set ports to null if no ports are given
   set_fact:
     port_list: null
   when: ports is defined and ports.values()|length <= 0
@@ -28,6 +29,7 @@
     env_vars_dict: "{{ env_vars_dict|default({}) | combine( {item.value.key | upper: item.value.value} ) }}"
   loop: "{{ lookup('dict', env_vars, wantlist=True) }}"
 
+- name: Set evs to null if no ports are given
   set_fact:
-    env_vars_dict: null
-  when: env_vars is defined and env_vars.values()|length <= 0
+    port_list: null
+  when: ports is defined and ports.values()|length <= 0
