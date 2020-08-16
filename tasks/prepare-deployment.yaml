@@ -1,0 +1,26 @@
+- name: Install python requirements
+  include_role:
+    name: install-requirements
+  vars:
+    update_packages: false
+    python_modules: "{{ podman_python_modules }}"
+  tags: setup
+
+- name: Make sure podman is installed
+  include_role:
+    name: install-configure-podman
+  tags: setup
+
+- name: Calculate list of ports to launch container
+  vars:
+    current_port: "{{ item.value.host }}:{{ item.value.container }}"
+  set_fact:
+    port_list: "{{ port_list | default([]) + [current_port] }}"
+  loop: "{{ lookup('dict', ports, wantlist=True) }}"
+
+- name: Calculate list of envs to launch container
+  vars:
+    current_env_var: '{{ item.value.key | upper }}: "{{ item.value.value }}"'
+  set_fact:
+    env_list: "{{ env_list | default([]) + [current_env_var] }}"
+  loop: "{{ lookup('dict', env_vars, wantlist=True) }}"
