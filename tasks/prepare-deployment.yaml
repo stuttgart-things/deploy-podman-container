@@ -19,7 +19,7 @@
   loop: "{{ lookup('dict', ports, wantlist=True) }}"
 
 - name: Calculate list of envs to launch container
-  env_list:
+  set_fact:
     env_list: '{{ env_list|default([]) + [ {{ item.value.key | upper }}: "{{ item.value.value }}" ] }}'
   loop: "{{ lookup('dict', env_vars, wantlist=True) }}"
 
