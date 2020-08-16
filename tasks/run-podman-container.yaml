@@ -29,4 +29,5 @@
     state: "{{ state }}"
     recreate: "{{ recreate }}"
     ports:
-      - "{{ lookup('dict', ports, wantlist=True) }}"
+      - "{{ item.value.host }}:{{ item.value.container }}"
+  loop: "{{ lookup('dict', ports, wantlist=True) }}"
