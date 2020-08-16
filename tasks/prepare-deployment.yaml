@@ -19,6 +19,7 @@
   loop: "{{ lookup('dict', ports, wantlist=True) }}"
   when: ports is defined and ports.values()|length > 0
 
+- name: Set ports to null
   set_fact:
     port_list: null
   when: ports is not defined
