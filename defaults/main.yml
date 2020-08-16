@@ -25,4 +25,4 @@ state: present
 recreate: yes
 
 ports: {}
-port_list: "{{ null if ports is defined and ports.values()|length <= 0 }}"
+env_vars: {}
