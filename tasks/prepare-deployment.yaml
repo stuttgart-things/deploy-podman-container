@@ -43,7 +43,7 @@
   loop: "{{ lookup('dict', mounts, wantlist=True) }}"
   when: mounts is defined
 
-- name: "Allow conatiner to modify files in {{ webserver_folder }}"
+- name: "Allow conatiner to modify files in {{ item.value.host | dirname }}"
   sefcontext:
     target: "{{  item.value.host | dirname }}(/.*)?"
     setype: httpd_sys_content_t
@@ -51,7 +51,7 @@
   loop: "{{ lookup('dict', mounts, wantlist=True) }}"
   when: mounts is defined
 
-- name: Apply new SELinux file context to filesystem
+- name: "Apply new SELinux file context to {{ item.value.host | dirname }}"
   command: "restorecon -Rv {{ item.value.host | dirname }}"
   loop: "{{ lookup('dict', mounts, wantlist=True) }}"
   when: mounts is defined
