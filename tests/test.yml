@@ -15,10 +15,10 @@
         env_vars:
           hostname:
             key: HOSTNAME
-            value: horst
+            value: "horst"
           location:
             key: LOCATION
-            value: stuttgart
+            value: "stuttgart"
         ports:
           http:
             host: 81
