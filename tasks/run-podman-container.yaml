@@ -28,5 +28,5 @@
     #command: redis-server --appendonly yes
     state: "{{ state }}"
     recreate: "{{ recreate }}"
-    expose:
-      - 80:80
+    ports:
+      - "{{ lookup('dict', ports, wantlist=True) }}"
