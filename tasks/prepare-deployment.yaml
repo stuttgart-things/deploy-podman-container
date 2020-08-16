@@ -19,6 +19,10 @@
   loop: "{{ lookup('dict', ports, wantlist=True) }}"
   when: ports is defined and ports.values()|length > 0
 
+  set_fact:
+    port_list: null
+  when: ports is defined and ports.values()|length > 0
+
 - name: Calculate list of env_vars to launch container
   set_fact:
     env_vars_dict: "{{ env_vars_dict|default({}) | combine( {item.value.key | upper: item.value.value} ) }}"
