@@ -25,9 +25,8 @@
   containers.podman.podman_container:
     name: "{{ container_name }}"
     image: "{{ container_image }}"
-    #command: redis-server --appendonly yes
     state: "{{ state }}"
     recreate: "{{ recreate }}"
     ports: 
       - "{{ item.value.host }}:{{ item.value.container }}"
-  loop: "{{ lookup('dict', ports, wantlist=True) }}"
+  loop: "{{ ports.values() | list }}"
