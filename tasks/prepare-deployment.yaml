@@ -34,7 +34,7 @@
     env_vars_dict: null
   when: env_vars is defined and env_vars.values()|length <= 0
 
-- name: create local mount dirs (if defined)
+- name: Create local mount dirs (if defined)
   tags: mounts
   file:
     path: "{{ item.value.host | dirname }}"
@@ -43,7 +43,7 @@
   loop: "{{ lookup('dict', mounts, wantlist=True) }}"
   when: mounts is defined
 
-- name: "Allow conatiner to modify files in mount dirs"
+- name: Allow conatiner to modify files in mount dirs
   sefcontext:
     target: "{{  item.value.host | dirname }}(/.*)?"
     setype: httpd_sys_content_t
@@ -51,7 +51,7 @@
   loop: "{{ lookup('dict', mounts, wantlist=True) }}"
   when: mounts is defined
 
-- name: "Apply new SELinux file context to mount dirs"
+- name: Apply new SELinux file context to mount dirs
   command: "restorecon -Rv {{ item.value.host | dirname }}"
   loop: "{{ lookup('dict', mounts, wantlist=True) }}"
   when: mounts is defined
