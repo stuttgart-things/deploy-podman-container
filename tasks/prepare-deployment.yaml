@@ -33,3 +33,35 @@
   set_fact:
     env_vars_dict: null
   when: env_vars is defined and env_vars.values()|length <= 0
+
+- name: create local mount dirs (if defined)
+  tags: mounts
+  file:
+    path: "{{ item.value.host | dirname }}"
+    state: directory
+    recurse: yes
+  loop: "{{ lookup('dict', mounts, wantlist=True) }}"
+  when: mounts is defined
+
+- name: "Allow conatiner to modify files in {{ webserver_folder }}"
+  sefcontext:
+    target: "{{  item.value.host | dirname }}(/.*)?"
+    setype: httpd_sys_content_t
+    state: present
+  loop: "{{ lookup('dict', mounts, wantlist=True) }}"
+  when: mounts is defined
+
+- name: Apply new SELinux file context to filesystem
+  command: "restorecon -Rv {{ item.value.host | dirname }}"
+  loop: "{{ lookup('dict', mounts, wantlist=True) }}"
+  when: mounts is defined
+
+- name: ensure container's exposed ports firewall state
+  tags: firewall
+  firewalld:
+    port: "{{ item.value.host }}/tcp"
+    permanent: yes
+    immediate: yes
+    state: enabled
+  loop: "{{ lookup('dict', ports, wantlist=True) }}"
+  when: ports is defined
