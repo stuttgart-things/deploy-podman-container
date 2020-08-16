@@ -3,7 +3,7 @@
  
 # python modules.
 podman_python_modules:
-  -name: yaml
+  - name: yaml
 
 # user
 container_run_as_user: root
