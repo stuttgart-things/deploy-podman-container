@@ -18,10 +18,10 @@
     port_list: "{{ port_list | default([]) + [current_port] }}"
   loop: "{{ lookup('dict', ports, wantlist=True) }}"
 
-- name: Calculate list of envs to launch container
-  set_fact:
-    env_list: '{{ env_list|default([]) + [ {{ item.value.key | upper }}: "{{ item.value.value }}" ] }}'
-  loop: "{{ lookup('dict', env_vars, wantlist=True) }}"
+# - name: Calculate list of envs to launch container
+#   set_fact:
+#     env_list: '{{ env_list|default([]) + [ {{ item.value.key | upper }}: "{{ item.value.value }}" ] }}'
+#   loop: "{{ lookup('dict', env_vars, wantlist=True) }}"
 
 # - name: Calculate list of envs to launch container
 #   vars:
