@@ -29,4 +29,5 @@
     state: "{{ state }}"
     recreate: "{{ recreate }}"
     ports: 
-      - "{% if ports is defined %}{% for port in ports.values() %}{{ port.host }}:{{ port.container }}{% endfor %}{% endif %}"
+      - "80:81"
+      - "443:443"
