@@ -28,4 +28,4 @@
     state: "{{ state }}"
     recreate: "{{ recreate }}"
     ports: "{{ port_list }}"
-    env: "{{ lookup('dict', env_vars) }}" 
+    env: "{{ env_vars_dict }}" 
