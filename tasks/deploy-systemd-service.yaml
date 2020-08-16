@@ -11,22 +11,6 @@
   when:
     - service_file_before_template.stat.exists
 
-- name: pull container image
-  podman_image:
-    name: "{{ container_image }}"
-
-#- name: pull container image
-#  command: "podman pull {{ container_image }}"
-
-- name: create local mount dirs (if defined)
-  tags: mounts
-  file:
-    path: "{{ item.value.host | dirname }}"
-    state: directory
-    recurse: yes
-  loop: "{{ lookup('dict', mounts, wantlist=True) }}"
-  when: mounts is defined
-
 - name: "create systemd service file for container: {{ container_name }}"
   template:
     src: systemd-service-single-container.j2
@@ -41,13 +25,3 @@
     enabled: yes
     state: started
     daemon_reload: yes
-
-- name: ensure container's exposed ports firewall state
-  tags: firewall
-  firewalld:
-    port: "{{ item.value.host }}/tcp"
-    permanent: yes
-    immediate: yes
-    state: enabled
-  loop: "{{ lookup('dict', ports, wantlist=True) }}"
-  when: ports is defined

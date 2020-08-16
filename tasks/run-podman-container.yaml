@@ -1,18 +1,34 @@
+- name: create local mount dirs (if defined)
+  tags: mounts
+  file:
+    path: "{{ item.value.host | dirname }}"
+    state: directory
+    recurse: yes
+  loop: "{{ lookup('dict', mounts, wantlist=True) }}"
+  when: mounts is defined
+
+- name: ensure container's exposed ports firewall state
+  tags: firewall
+  firewalld:
+    port: "{{ item.value.host }}/tcp"
+    permanent: yes
+    immediate: yes
+    state: enabled
+  loop: "{{ lookup('dict', ports, wantlist=True) }}"
+  when: ports is defined
+
 - name: pull container image
   podman_image:
     name: redis
 
-- name: Run podman container
-  hosts: localhost
-  tasks:
-    - name: Run redis container
-      containers.podman.podman_container:
-        name: myredis
-        image: redis
-        command: redis-server --appendonly yes
-        state: present
-        recreate: yes
-        expose:
-          - 6379
-        volumes_from:
-          - mydata
+- name: Run redis container
+  containers.podman.podman_container:
+    name: myredis
+    image: redis
+    command: redis-server --appendonly yes
+    state: present
+    recreate: yes
+    expose:
+      - 6379
+    volumes_from:
+      - mydata
