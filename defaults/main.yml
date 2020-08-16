@@ -24,3 +24,4 @@ restart_policy: always
 state: present
 recreate: yes
 
+ports: {}
