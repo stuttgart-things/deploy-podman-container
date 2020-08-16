@@ -27,5 +27,5 @@
     image: "{{ container_image }}"
     state: "{{ state }}"
     recreate: "{{ recreate }}"
-    ports: "{{ port_list }}"
+    ports: null
     env: "{{ env_vars_dict }}" 
