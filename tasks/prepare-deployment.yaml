@@ -22,5 +22,5 @@
   vars:
     current_env_var: '{{ item.value.key | upper }}: "{{ item.value.value }}"'
   set_fact:
-    env_list: "{{ env_list | default([]) + [current_env_var] }}"
+    env_list: "{{ env_list + [current_env_var] }}"
   loop: "{{ lookup('dict', env_vars, wantlist=True) }}"
