@@ -19,10 +19,10 @@
           location:
             key: LOCATION
             value: '"stuttgart"'
-        ports:
-          http:
-            host: 81
-            container: 80
-          https:
-            host: 444
-            container: 443
+            #        ports:
+            #  http:
+            # host: 81
+            #container: 80
+            # https:
+            # host: 444
+            #container: 443

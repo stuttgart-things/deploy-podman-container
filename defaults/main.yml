@@ -24,4 +24,3 @@ restart_policy: always
 state: present
 recreate: yes
 
-port_list: "{{ 'port_list' if ports is not defined == null }}"
