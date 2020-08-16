@@ -18,7 +18,7 @@
             value: '"horst"'
           location:
             key: LOCATION
-            value: "'stuttgart"'
+            value: '"stuttgart"'
         ports:
           http:
             host: 81
