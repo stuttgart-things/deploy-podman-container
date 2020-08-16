@@ -1,5 +1,9 @@
 ---
 # defaults file for deploy-podman-container
+ 
+# python modules.
+podman_python_modules:
+  -name: yaml
 
 # user
 container_run_as_user: root
@@ -17,3 +21,4 @@ pidfile: "/tmp/{{ service_name }}.pid"
 container_restart: on-failure
 container_stop_timeout: 15
 restart_policy: always
+
