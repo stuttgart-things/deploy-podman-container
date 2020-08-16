@@ -30,4 +30,4 @@
     recreate: "{{ recreate }}"
     ports: 
       - "{{ item.value.host }}:{{ item.value.container }}"
-  with_items: "{{ lookup('dict', ports, wantlist=True) }}"
+  loop: "{{ lookup('dict', ports, wantlist=True) }}"
