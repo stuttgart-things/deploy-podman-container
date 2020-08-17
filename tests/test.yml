@@ -4,6 +4,7 @@
   roles:
     - role: deploy-podman-container
       vars: 
+        permanent: true
         container_name: env-test2
         container_image: nginx:latest
         container_run_args: >-
