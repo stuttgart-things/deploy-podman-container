@@ -10,4 +10,4 @@
     recreate: "{{ recreate }}"
     env: "{{ env_vars_dict }}" 
     ports: "{{ port_list }}"
-    volumes: "{{ volume_list }}"
+    volumes: "{{ vomount_list }}"
