@@ -6,4 +6,4 @@
 
 - name: Enable systemd service
   include: deploy-systemd-service.yaml
-
+  when: permanent|bool

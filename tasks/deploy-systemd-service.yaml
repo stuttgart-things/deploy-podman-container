@@ -1,9 +1,18 @@
-- name: check if service file is already existing
+- name: Ensure "{{ container_name }}" is stopped
+  containers.podman.podman_container:
+    name: "{{ container_name }}"
+    image: "{{ container_image }}"
+    state: absent
+    recreate: "{{ recreate }}"
+    ports: "{{ port_list }}"
+    env: "{{ env_vars_dict }}" 
+
+- name: Check if service file is already existing
   stat:
     path: "{{ service_files_dir }}/{{ service_name }}"
   register: service_file_before_template
 
-- name: ensure "{{ service_name }}" is stopped
+- name: Ensure "{{ service_name }}" is stopped
   service:
     name: "{{ service_name }}"
     state: stopped
@@ -11,7 +20,15 @@
   when:
     - service_file_before_template.stat.exists
 
-- name: "create systemd service file for container: {{ container_name }}"
+- name: Make sure there are no cid and pid files present
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - "{{ cidfile }}"
+    - "{{ pidfile }}"
+
+- name: "Create systemd service file for container: {{ container_name }}"
   template:
     src: systemd-service-single-container.j2
     dest: "{{ service_files_dir }}/{{ service_name }}"
@@ -19,7 +36,7 @@
     group: root
     mode: 0644
 
-- name: "ensure service is enabled at boot, and systemd reloaded"
+- name: "Ensure service is enabled at boot, and systemd reloaded"
   systemd:
     name: "{{ service_name }}"
     enabled: yes
