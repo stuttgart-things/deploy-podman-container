@@ -11,7 +11,7 @@
           -d
         mounts:
           webserverconfig:
-            host: /tmp/test
+            host: /tmp/test/
             container: /test:Z
         env_vars:
           hostname:
