@@ -1,5 +1,14 @@
-- name: Prepare deployment
-  include: prepare-deployment.yaml
+- name: Install requirements
+  include: install-requirements.yaml
+
+- name: Prepare envs
+  include: prepare-envs.yaml
+
+- name: Prepare mounts
+  include: prepare-mounts.yaml
+
+- name: Prepare ports 
+  include: prepare-ports.yaml
 
 - name: Run podman container 
   include: run-podman-container.yaml

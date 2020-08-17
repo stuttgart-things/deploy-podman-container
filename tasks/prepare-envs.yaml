@@ -1,0 +1,9 @@
+- name: Calculate list of env_vars to launch container
+  set_fact:
+    env_vars_dict: "{{ env_vars_dict|default({}) | combine( {item.value.key | upper: item.value.value} ) }}"
+  loop: "{{ lookup('dict', env_vars, wantlist=True) }}"
+
+- name: Set env_vars_dict to null if no env vars are given
+  set_fact:
+    env_vars_dict: null
+  when: env_vars is defined and env_vars.values()|length <= 0

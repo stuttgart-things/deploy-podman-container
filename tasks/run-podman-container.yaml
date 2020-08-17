@@ -8,5 +8,6 @@
     image: "{{ container_image }}"
     state: "{{ state }}"
     recreate: "{{ recreate }}"
-    ports: "{{ port_list }}"
     env: "{{ env_vars_dict }}" 
+    ports: "{{ port_list }}"
+    volumes: "{{ volume_list }}"

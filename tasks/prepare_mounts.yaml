@@ -1,0 +1,34 @@
+- name: Calculate list of volumes to launch container
+  vars:
+    current_mount: "{{ item.value.host }}:{{ item.value.container }}"
+  set_fact:
+    mount_list: "{{ mount_list | default([]) + [current_mount] }}"
+  loop: "{{ lookup('dict', mounts, wantlist=True) }}"
+  when: mounts is defined and mounts.values()|length > 0
+
+- name: Set mounts to null if no volumes are given
+  set_fact:
+    mount_list: null
+  when: mounts is defined and mounts.values()|length <= 0
+
+- name: Create local mount dirs (if defined)
+  tags: mounts
+  file:
+    path: "{{ item.value.host | dirname }}"
+    state: directory
+    recurse: yes
+  loop: "{{ lookup('dict', mounts, wantlist=True) }}"
+  when: mounts is defined
+
+- name: Allow conatiner to modify files in mount dirs
+  sefcontext:
+    target: "{{  item.value.host | dirname }}(/.*)?"
+    setype: httpd_sys_content_t
+    state: present
+  loop: "{{ lookup('dict', mounts, wantlist=True) }}"
+  when: mounts is defined
+
+- name: Apply new SELinux file context to mount dirs
+  command: "restorecon -Rv {{ item.value.host | dirname }}"
+  loop: "{{ lookup('dict', mounts, wantlist=True) }}"
+  when: mounts is defined

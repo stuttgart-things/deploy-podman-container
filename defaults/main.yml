@@ -25,5 +25,6 @@ state: present
 recreate: yes
 
 ports: {}
+mounts: {}
 env_vars: {}
 permanent: false
