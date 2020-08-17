@@ -1,0 +1,44 @@
+---
+- hosts: all
+  become: true
+  roles:
+    - role: deploy-podman-container
+      vars: 
+        permanent: false 
+        container_name: poc-registry
+        container_image: docker.io/library/registry:2
+        container_run_args: >-
+          -d
+        mounts:
+          data:
+            host: /opt/registry/data
+            container: /var/lib/registry:z
+          auth:
+            host: /opt/registry/auth
+            container: /auth:z
+          certs:
+            host: /opt/registry/certs
+            container: /certs:z
+        env_vars:
+          registry_http_tls_key:
+            key: REGISTRY_HTTP_TLS_KEY
+            value: /certs/domain.key
+          registry_http_tls_cert:
+            key: REGISTRY_HTTP_TLS_CERTIFICATE
+            value: /certs/domain.crt
+          registry_auth_htpasswd_path:
+            key: '"REGISTRY_AUTH_HTPASSWD_PATH"'
+            value: '"/auth/htpasswd"'
+          stry_http_tls_key:
+            key: '"REGISTRY_HTTP_SECRET"'
+            value: '"ALongRandomSecretForRegistry"'
+          registry_http_tls_cert:
+            key: '"REGISTRY_AUTH_HTPASSWD_REALM"'
+            value: '"Registry"' 
+          registry_auth_htpasswd_path:
+            key: '"REGISTRY_AUTH"'
+            value: '"htpasswd"'
+        ports:
+          registry:
+            host: 5000
+            container: 5000

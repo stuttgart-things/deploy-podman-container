@@ -1,11 +1,7 @@
 - name: Ensure "{{ container_name }}" is stopped
   containers.podman.podman_container:
     name: "{{ container_name }}"
-    image: "{{ container_image }}"
     state: absent
-    recreate: "{{ recreate }}"
-    ports: "{{ port_list }}"
-    env: "{{ env_vars_dict }}" 
 
 - name: Check if service file is already existing
   stat:
