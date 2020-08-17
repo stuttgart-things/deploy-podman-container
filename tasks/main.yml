@@ -13,6 +13,10 @@
 - name: Run podman container 
   include: run-podman-container.yaml
 
+- name: Stop podman container
+  include: stop-podman-container.yaml
+  when: permanent|bool or stop-podman-container|bool
+
 - name: Enable systemd service
   include: deploy-systemd-service.yaml
   when: permanent|bool
