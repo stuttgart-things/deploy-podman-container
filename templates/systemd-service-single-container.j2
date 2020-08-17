@@ -7,9 +7,8 @@ Restart={{ restart_policy }}
 Type=simple
 TimeoutStartSec={{ systemd_TimeoutStartSec }}
 ExecStartPre=-/usr/bin/rm -f {{ pidfile }} {{ cidfile }}
-User={{ container_run_as_user }}
 
-ExecStart=sudo /usr/bin/podman run {% if container_run_args is defined %}{{ container_run_args }}{% endif %} \
+ExecStart=/usr/bin/podman run {% if container_run_args is defined %}{{ container_run_args }}{% endif %} \
 --name {{ container_name }} \
 {% if ports is defined %}{% for port in ports.values() %}
 -p {{ port.host }}:{{ port.container }} \
@@ -25,8 +24,8 @@ ExecStart=sudo /usr/bin/podman run {% if container_run_args is defined %}{{ cont
 {{ container_image }} {% if container_cmd_args is defined %} \
 {{ container_cmd_args }} {% endif %}  
 
-ExecStop=sudo /usr/bin/sh -c "/usr/bin/podman stop -t "{{ container_stop_timeout }}" `cat {{ cidfile }}`"
-ExecStop=sudo /usr/bin/sh -c "/usr/bin/podman rm -f `cat {{ cidfile }}`"
+ExecStop=/usr/bin/sh -c "/usr/bin/podman stop -t "{{ container_stop_timeout }}" `cat {{ cidfile }}`"
+ExecStop=/usr/bin/sh -c "/usr/bin/podman rm -f `cat {{ cidfile }}`"
 Restart={{ container_restart }}
 RestartSec={{ systemd_RestartSec }}
 KillMode=none
