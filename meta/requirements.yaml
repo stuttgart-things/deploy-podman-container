@@ -4,4 +4,7 @@
   scm: git
 - src: git@codehub.sva.de:Lab/stuttgart-things/kubernetes/deploy-podman-container.git
   scm: git
+  
+collections:
+- name: containers.podman
  
