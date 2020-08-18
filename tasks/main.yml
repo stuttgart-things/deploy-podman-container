@@ -1,3 +1,8 @@
+- name: Make sure podman is installed
+  include_role:
+    name: install-configure-podman
+  tags: setup
+
 - name: Deploy single container
   include: deploy_single_container.yaml
 
