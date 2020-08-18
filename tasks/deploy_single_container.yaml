@@ -12,7 +12,11 @@
     - service_file_before_template.stat.exists
 
 - name: pull container image
-  command: "podman pull {{ container_image }}"
+  podman_image:
+    name: "{{ container_image }}"
+
+#- name: pull container image
+#  command: "podman pull {{ container_image }}"
 
 - name: create local mount dirs (if defined)
   tags: mounts
