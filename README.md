@@ -53,6 +53,8 @@ sudo cat <<EOF > ./requirements.yaml
   scm: git
 - src: git@codehub.sva.de:Lab/stuttgart-things/kubernetes/deploy-podman-container.git
   scm: git
+collections:
+- name: containers.podman
 EOF
 ansible-galaxy install -r ./requirements.yaml --force
 ```
