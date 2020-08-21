@@ -23,7 +23,7 @@ container_stop_timeout: 15
 restart_policy: always
 state: present
 recreate: yes
-stop-podman-container: false
+run-podman-container: true
 ignore_errors: false 
 
 # list var declaration
