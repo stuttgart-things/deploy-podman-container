@@ -1,17 +1,22 @@
 - name: Install requirements
   include: install-requirements.yaml
-
+  when: run_podman_container|bool
+  
 - name: Prepare envs
   include: prepare-envs.yaml
+  when: run_podman_container|bool
 
 - name: Prepare mounts
   include: prepare-mounts.yaml
+  when: run_podman_container|bool
 
 - name: Prepare ports 
   include: prepare-ports.yaml
+  when: run_podman_container|bool
 
 - name: Run podman container 
   include: run-podman-container.yaml
+  when: run_podman_container|bool
 
 - name: Stop podman container
   include: stop-podman-container.yaml
