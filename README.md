@@ -48,12 +48,13 @@ Role Requirements / Dependencies
 ```
 sudo cat <<EOF > ./requirements.yaml
 roles:
-- src: git@codehub.sva.de:Lab/stuttgart-things/ansible/install-configure-podman.git
+- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-configure-podman.git
   scm: git
-- src: git@codehub.sva.de:Lab/stuttgart-things/kubernetes/deploy-podman-container.git
+- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/deploy-podman-container.git
   scm: git
 - src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-requirements.git
   scm: git
+  
 collections:
 - name: containers.podman 
 EOF
