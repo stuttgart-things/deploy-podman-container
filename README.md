@@ -58,8 +58,7 @@ roles:
 collections:
 - name: containers.podman 
 EOF
-ansible-galaxy install -r ./requirements.yaml --force
-ansible-galaxy collection install -r meta/requirements.yaml -f
+ansible-galaxy install -r ./requirements.yaml --force && ansible-galaxy collection install -r ./requirements.yaml -f
 ```
 
 License
