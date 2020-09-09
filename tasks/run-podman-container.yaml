@@ -11,4 +11,4 @@
     env: "{{ env_vars_dict }}" 
     ports: "{{ port_list }}"
     volumes: "{{ mount_list }}"
-    cmd_args: "{{ cmd_args | default(omit) }}"
+    cmd_args: "{{ container_cmd_args | default(omit) }}"
