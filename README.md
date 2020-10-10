@@ -23,39 +23,68 @@ EOF
 ansible-galaxy install -r ./requirements.yaml --force && ansible-galaxy collection install -r ./requirements.yaml -f
 ```
 
-Example Playbook for a root container 
--------------------------------------
+Example Playbook + vars profile for deploying a minio container 
+---------------------------------------------------------------
 
 ```
+sudo cat <<EOF > ./deploy-podman-container.yaml
 ---
-- hosts: loadbalancer
+- hosts: "{{ target_host | default('all') }}"
+  gather_facts: true
   become: true
+  vars_files:
+    - "./{{ container }}.yaml"
+
   roles:
-    - base-os-setup # installs basic os setup + updates packages
-    - install-configure-podman # installs podman, buildah + skopeo
     - role: deploy-podman-container
-      vars: 
-        container_name: rancher-loadbalancer
-        container_image: nginx:latest
-        container_run_args: >-
-          -d
-        mounts:
-          webserverconfig:
-            host: /tmp/test
-            container: /test:Z
-        env_vars:
-          hostname:
-            key: INGRESS_HTTP
-            value: master0.openshift.example
-        ports:
-          http:
-            host: 80
-            container: 80
-          https:
-            host: 443
-            container: 443  
-        #container_cmd_args: 
+EOF
+
+sudo cat <<EOF > ./minio.yaml
+---
+container_name: minio
+permanent: true
+container_image: minio/minio:latest
+container_run_args: >-
+    -d
+container_cmd_args: >-
+    server /data
+mounts:
+  data:
+    host: "/podman/pv/{{ container_name }}/data/"  
+    container: /data:z
+  config:
+    host: "/podman/pv/{{ container_name }}/config/"
+    container: /config:z
+  certs:
+    host: "/podman/pv/{{ container_name }}/certs/"
+    container: /root/.minio/certs:z
+
+env_vars:
+  ACCESS_KEY:
+    key: MINIO_ACCESS_KEY
+    value: admin
+  SECRET_KEY:
+    key: MINIO_SECRET_KEY
+    value: jackhammer
+ports:
+  minio:
+    host: 9000
+    container: 9000
+EOF
+
+ansible-playbook -i my_inventory deploy-podman-container.yaml \
+-e "container=minio" \
+-vv
+
 ```
+
+Role history
+----------------
+| date  | who | changelog |
+|---|---|---|
+|2020-07-08  | Patrick Hermann | intial commit for this role in codehub
+|2020-10-12   | Patrick Hermann | Updated for using of ansible collections, fixed role structure, added ability of generation self signed certs
+
 
 License
 -------
