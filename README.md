@@ -71,11 +71,16 @@ ports:
     host: 9000
     container: 9000
 EOF
+```
 
-ansible-playbook -i my_inventory deploy-podman-container.yaml \
--e "container=minio" \
+Playbook execution
+---------------------------------------------------------------
+```
+ansible-playbook -i ../my_inventory_file \
+-e target_host=srv-minio
+-e container=minio \
+deploy-podman-container.yaml
 -vv
-
 ```
 
 Role history
@@ -84,7 +89,6 @@ Role history
 |---|---|---|
 |2020-07-08  | Patrick Hermann | intial commit for this role in codehub
 |2020-10-12   | Patrick Hermann | Updated for using of ansible collections, fixed role structure, added ability of generation self signed certs
-
 
 License
 -------
