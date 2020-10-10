@@ -27,7 +27,7 @@ Example Playbook + vars profile for deploying a minio container
 ---------------------------------------------------------------
 
 ```
-sudo cat <<EOF > ./deploy-podman-container.yaml
+cat <<EOF > ./deploy-podman-container.yaml
 ---
 - hosts: "{{ target_host | default('all') }}"
   gather_facts: true
@@ -39,7 +39,7 @@ sudo cat <<EOF > ./deploy-podman-container.yaml
     - role: deploy-podman-container
 EOF
 
-sudo cat <<EOF > ./minio.yaml
+cat <<EOF > ./minio.yaml
 ---
 container_name: minio
 permanent: true
@@ -79,7 +79,7 @@ Playbook execution
 ansible-playbook -i ../my_inventory_file \
 -e target_host=srv-minio
 -e container=minio \
-deploy-podman-container.yaml
+deploy-podman-container.yaml \
 -vv
 ```
 
