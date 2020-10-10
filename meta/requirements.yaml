@@ -5,6 +5,8 @@ roles:
   scm: git
 - src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-requirements.git
   scm: git
-  
+- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/generate-selfsigned-certs.git
+  scm: git
+
 collections:
 - name: containers.podman 
