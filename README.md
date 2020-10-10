@@ -3,10 +3,25 @@ deploy-podman-conatiner
 
 deploys reboot resistant podman containers.
 
-Requirements
-------------
+Role Requirements / Dependencies
+--------------------------------
 
-or any other system w/ installed podman, systemd + firewalld. e.g. CentOs8.
+```
+sudo cat <<EOF > ./requirements.yaml
+roles:
+- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-configure-podman.git
+  scm: git
+- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/deploy-podman-container.git
+  scm: git
+- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-requirements.git
+  scm: git
+- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/generate-selfsigned-certs.git
+  scm: git
+collections:
+- name: containers.podman 
+EOF
+ansible-galaxy install -r ./requirements.yaml --force && ansible-galaxy collection install -r ./requirements.yaml -f
+```
 
 Example Playbook for a root container 
 -------------------------------------
@@ -40,25 +55,6 @@ Example Playbook for a root container
             host: 443
             container: 443  
         #container_cmd_args: 
-```
-
-Role Requirements / Dependencies
---------------------------------
-
-```
-sudo cat <<EOF > ./requirements.yaml
-roles:
-- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-configure-podman.git
-  scm: git
-- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/deploy-podman-container.git
-  scm: git
-- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-requirements.git
-  scm: git
-  
-collections:
-- name: containers.podman 
-EOF
-ansible-galaxy install -r ./requirements.yaml --force && ansible-galaxy collection install -r ./requirements.yaml -f
 ```
 
 License
