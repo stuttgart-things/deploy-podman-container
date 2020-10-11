@@ -7,4 +7,5 @@
     certs_copy_target: "{{ cert_mount_target }}"
     key_name: "{{ cert_key_name }}"
     crt_name: "{{ cert_crt_name }}"
+    remote_src: "{{ cert_remote_src }}"
   tags: certs
