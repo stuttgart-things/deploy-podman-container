@@ -28,10 +28,12 @@ recreate: yes
 run_podman_container: true
 ignore_errors: false 
 
+#certs
+generate_certs: false
+cert_remote_src: true
+
 # list var declaration
 ports: {}
 mounts: {}
 env_vars: {}
 permanent: false
-
-cert_remote_src: true
