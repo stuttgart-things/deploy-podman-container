@@ -6,6 +6,6 @@
     ssl_ip: "{{ ansible_default_ipv4.address }}"
     certs_copy_target: "{{ mounts[certs.host] }}"
   tags: certs
-  when: generate_certs|bool and generate_certs_option = "self_signed"
+
 
 
