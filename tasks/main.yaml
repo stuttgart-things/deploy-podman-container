@@ -10,6 +10,10 @@
   include: prepare-mounts.yaml
   when: run_podman_container|bool
 
+- name: Generate certificates
+  include: "generate-{{ certificate_option }}-certs.yaml"
+  when: generate_certs|bool
+
 - name: Prepare ports 
   include: prepare-ports.yaml
   when: run_podman_container|bool
