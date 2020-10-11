@@ -33,3 +33,5 @@ ports: {}
 mounts: {}
 env_vars: {}
 permanent: false
+
+cert_remote_src: true
