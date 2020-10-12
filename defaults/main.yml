@@ -7,7 +7,7 @@ podman_os_packages:
 podman_python_modules:
   - name: pyyaml
   - name: selinux
-
+  - name: seobject
 # user
 container_run_as_user: root
 container_run_as_group: root
