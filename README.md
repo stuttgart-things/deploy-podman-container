@@ -18,7 +18,8 @@ roles:
 - src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/generate-selfsigned-certs.git
   scm: git
 collections:
-- name: containers.podman 
+- name: containers.podman
+- name: community.general 
 EOF
 ansible-galaxy install -r ./requirements.yaml --force && ansible-galaxy collection install -r ./requirements.yaml -f
 ```
