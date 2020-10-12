@@ -20,6 +20,8 @@ roles:
 collections:
 - name: containers.podman
 - name: community.general 
+- name: ansible.posix
+
 EOF
 ansible-galaxy install -r ./requirements.yaml --force && ansible-galaxy collection install -r ./requirements.yaml -f
 ```
