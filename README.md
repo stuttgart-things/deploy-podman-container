@@ -11,6 +11,8 @@ sudo cat <<EOF > ./requirements.yaml
 roles:
 - src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-configure-podman.git
   scm: git
+- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-configure-vault.git
+  scm: git
 - src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/deploy-podman-container.git
   scm: git
 - src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-requirements.git
