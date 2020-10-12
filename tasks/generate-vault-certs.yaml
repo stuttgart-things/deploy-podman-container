@@ -2,6 +2,7 @@
   include_role:
     name: install-configure-vault
   vars:
+    vault_ca_cert_role_name: "{{ vault_role_name }}"
     vault_gen_cert_install_pub_path: "{{ cert_mount_target }}/{{ cert_crt_name }}"
     vault_gen_cert_install_priv_path: "{{ cert_mount_target }}/{{ cert_key_name }}"
     vault_gen_cert_install_ca_path: "{{ cert_mount_target }}/{{ cert_ca_crt_name | default('ca.pem') }}"
