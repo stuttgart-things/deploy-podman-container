@@ -1,10 +1,10 @@
 - name: Check if service file is already existing
-  stat:
+  ansible.builtin.stat:
     path: "{{ service_files_dir }}/{{ service_name }}"
   register: service_file_before_template
 
 - name: Ensure "{{ service_name }}" is stopped
-  service:
+  ansible.builtin.service:
     name: "{{ service_name }}"
     state: stopped
     enabled: no
@@ -12,7 +12,7 @@
     - service_file_before_template.stat.exists
 
 - name: Make sure there are no cid and pid files present
-  file:
+  ansible.builtin.file:
     path: "{{ item }}"
     state: absent
   loop:
@@ -20,7 +20,7 @@
     - "{{ pidfile }}"
 
 - name: "Create systemd service file for container: {{ container_name }}"
-  template:
+  ansible.builtin.template:
     src: systemd-service-single-container.j2
     dest: "{{ service_files_dir }}/{{ service_name }}"
     owner: root
@@ -28,7 +28,7 @@
     mode: 0644
 
 - name: "Ensure service is enabled at boot, and systemd reloaded"
-  systemd:
+  ansible.builtin.systemd:
     name: "{{ service_name }}"
     enabled: yes
     state: started
