@@ -18,17 +18,17 @@
     state: directory
     recurse: yes
   loop: "{{ lookup('dict', mounts, wantlist=True) }}"
-  when: mounts is defined
-
+  when: mounts is defined 
+  
 - name: Allow conatiner to modify files in mount dirs
   community.general.sefcontext:
     target: "{{  item.value.host | dirname }}(/.*)?"
     setype: httpd_sys_content_t
     state: present
   loop: "{{ lookup('dict', mounts, wantlist=True) }}"
-  when: mounts is defined
+  when: mounts is defined and ansible_os_family != 'Debian' 
 
 - name: Apply new SELinux file context to mount dirs
   command: "restorecon -Rv {{ item.value.host | dirname }}"
   loop: "{{ lookup('dict', mounts, wantlist=True) }}"
-  when: mounts is defined
+  when: mounts is defined and ansible_os_family != 'Debian' 
