@@ -1,11 +1,15 @@
 - name: generate ssl certificates by vault
   include_role:
     name: install-configure-vault
-    tasks_from: generate-cert
   vars:
-    ssl_subject: "{{ cert_ssl_subject }}"
-    certs_copy_target: "{{ cert_mount_target }}"
-    key_name: "{{ cert_key_name }}"
-    crt_name: "{{ cert_crt_name }}"
-    remote_src: "{{ cert_remote_src }}"
+    vault_gen_cert: true
+    vault_gen_cert_install: true
+    vault_gen_cert_install_pub_path: "{{ cert_mount_target }}/{{ cert_key_name }}"
+    vault_gen_cert_install_priv_path: "{{ cert_mount_target }}/{{ cert_crt_name }}"
+    vault_gen_cert_install_ca_path: "{{ cert_mount_target }}/{{ cert_ca_key_name }}"
+    vault_gen_cert_fqdn: "{{ cert_ssl_subject }}"
+    vault_url: "{{ vault_url }}"
+    vault_username: "{{ vault_username }}"
+    vault_password: "{{ vault_password }}"
+    vault_token: "{{ vault_token }}" # If token, username and password are ignored
   tags: certs
