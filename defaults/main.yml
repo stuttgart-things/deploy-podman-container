@@ -6,6 +6,7 @@ podman_os_packages:
   - gcc
 podman_python_modules:
   - name: pyyaml
+  - name: selinux
 
 # user
 container_run_as_user: root
