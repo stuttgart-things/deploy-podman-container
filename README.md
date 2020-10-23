@@ -1,4 +1,4 @@
-deploy-podman-conatiner
+stuttgart-things/deploy-podman-conatiner
 =======================
 
 deploys reboot resistant podman containers.
