@@ -1,0 +1,6 @@
+---
+- name: Create config from template
+  template:
+    src: "{{ config_template }}"
+    dest: "{{ config_mount_target }}"
+    backup: yes
