@@ -33,6 +33,8 @@ ignore_errors: false
 generate_certs: false
 cert_remote_src: true
 
+generate_config: false
+
 # list var declaration
 ports: {}
 mounts: {}
