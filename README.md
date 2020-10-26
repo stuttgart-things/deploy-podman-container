@@ -25,7 +25,7 @@ collections:
 - name: ansible.posix
 
 EOF
-ansible-galaxy install -r ./requirements.yaml --force && ansible-galaxy collection install -r ./requirements.yaml -f
+ansible-galaxy install -r /tmp/requirements.yaml --force && ansible-galaxy collection install -r /tmp/requirements.yaml -f
 ```
 
 Example Playbook + vars profile for deploying a minio container 
