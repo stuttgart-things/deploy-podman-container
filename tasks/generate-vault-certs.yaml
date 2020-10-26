@@ -7,6 +7,7 @@
     vault_gen_cert_install_priv_path: "{{ cert_mount_target }}/{{ cert_key_name }}"
     vault_gen_cert_install_ca_path: "{{ cert_mount_target }}/{{ cert_ca_crt_name | default('ca.pem') }}"
     vault_gen_cert_fqdn: "{{ cert_ssl_subject }}"
+    vault_gen_cert_ip_sans: "{{ cert_ssl_ip }}"
     vault_gen_cert: true
     vault_gen_cert_install: true
   tags: certs
