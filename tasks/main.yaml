@@ -18,6 +18,10 @@
   include: prepare-ports.yaml
   when: run_podman_container|bool
 
+- name: Teamplate config file
+  include: template-config-file.yaml
+  when: generate_config|bool
+
 - name: Run podman container 
   include: run-podman-container.yaml
   when: run_podman_container|bool
