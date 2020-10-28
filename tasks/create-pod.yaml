@@ -1,0 +1,22 @@
+---
+- name: Create pod  
+  containers.podman.podman_pod:
+    name: "{{ pod_name }}"
+    state: "{{ pod_state }}"
+    ports:
+      - {{ ports }}
+
+# -> prepare ports
+
+# -> prepare mounts per container
+
+- name: Add containers to created pod
+  containers.podman.podman_container:
+    name: "{{ container_name }}"
+    image: "{{ container_name }}"
+    state: "{{ container_name }}"
+    pod: "{{ pod_name }}"
+  loop: 
+    - "{{ containers }}"
+
+# -> create systemd service
