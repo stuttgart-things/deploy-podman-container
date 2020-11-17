@@ -1,0 +1,7 @@
+---
+- name: "Trying to pull {{ container_image }}" 
+  containers.podman.podman_image:
+    name: "{{ container_image }}"
+    username: "{{ registry_user | default(omit) }}"
+    password: "{{ registry_password | default(omit) }}"
+    validate_certs: "{{ validate_certs | default(False) }}"

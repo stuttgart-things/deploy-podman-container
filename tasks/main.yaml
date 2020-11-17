@@ -1,7 +1,11 @@
 - name: Install requirements
   include: install-requirements.yaml
   when: run_podman_container|bool
-  
+
+- name: Pull image
+  include: pull-image.yaml
+  when: run_podman_container|bool
+
 - name: Prepare envs
   include: prepare-envs.yaml
   when: run_podman_container|bool

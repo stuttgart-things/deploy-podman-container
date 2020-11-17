@@ -1,7 +1,4 @@
-- name: pull container image
-  podman_image:
-    name: "{{ container_image }}"
-
+---
 - name: Run container
   containers.podman.podman_container:
     name: "{{ container_name }}"
