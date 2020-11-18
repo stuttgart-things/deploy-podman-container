@@ -3,7 +3,7 @@
   when: run_podman_container|bool
 
 - name: Pull image
-  include: pull-image.yaml
+  include: pull-container.yaml
   when: run_podman_container|bool
 
 - name: Prepare envs
