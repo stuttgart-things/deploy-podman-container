@@ -6,6 +6,14 @@
   include: pull-container.yaml
   when: run_podman_container|bool
 
+- name: Prepare ports 
+  include: prepare-ports.yaml
+  when: run_podman_container|bool
+
+- name: Create pod
+  include: prepare-ports.yaml
+  when: run_podman_container|bool and pod_name is defined
+
 - name: Prepare envs
   include: prepare-envs.yaml
   when: run_podman_container|bool
@@ -17,10 +25,6 @@
 - name: Generate certificates
   include: "generate-{{ certificate_option }}-certs.yaml"
   when: generate_certs|bool
-
-- name: Prepare ports 
-  include: prepare-ports.yaml
-  when: run_podman_container|bool
 
 - name: Teamplate config file
   include: template-config-file.yaml
@@ -36,4 +40,4 @@
 
 - name: Enable systemd service
   include: deploy-systemd-service.yaml
-  when: permanent|bool and run_podman_container
+  when: permanent|bool

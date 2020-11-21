@@ -31,5 +31,5 @@
   ansible.builtin.systemd:
     name: "{{ service_name }}"
     enabled: yes
-    state: started
+    state: "{{ systemd_state }}"
     daemon_reload: yes

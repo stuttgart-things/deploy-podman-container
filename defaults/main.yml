@@ -15,6 +15,7 @@ container_run_as_group: root
 # systemd service 
 service_files_dir: /etc/systemd/system
 service_name: "{{ container_name }}-container-pod.service"
+systemd_state: "{% if run_podman_container|bool %}started{% elif not run_podman_container %}stopped{% endif %}"
 systemd_TimeoutStartSec: 15
 systemd_RestartSec: 30
 cidfile: "/tmp/{{ service_name }}.cid"
@@ -28,6 +29,7 @@ state: present
 recreate: yes
 run_podman_container: true
 ignore_errors: false 
+
 
 #certs
 generate_certs: false
