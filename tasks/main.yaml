@@ -36,4 +36,4 @@
 
 - name: Enable systemd service
   include: deploy-systemd-service.yaml
-  when: permanent|bool
+  when: permanent|bool and run_podman_container
