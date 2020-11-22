@@ -2,7 +2,7 @@
 - name: Create pod  
   containers.podman.podman_pod:
     name: "{{ pod_name }}"
-    state: present
+    state: created
     share: cgroup,ipc,uts
 
 # # -> prepare ports
