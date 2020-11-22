@@ -1,6 +1,6 @@
 ---
 # defaults file for deploy-podman-container
- 
+service_state: present
 # python modules.
 podman_os_packages:
   - gcc

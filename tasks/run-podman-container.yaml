@@ -1,5 +1,5 @@
 ---
-- name: Run container
+- name: Run container (if the container should be running permanently - it will be stopped and restarted in a systemd service)
   containers.podman.podman_container:
     name: "{{ container_name }}"
     image: "{{ container_image }}"

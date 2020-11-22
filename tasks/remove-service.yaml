@@ -1,0 +1,25 @@
+---
+- name: Stop existing service
+  ansible.builtin.systemd:
+    name: "{{ service_name }}"
+    enabled: yes
+    state: stopped
+    daemon_reload: yes
+
+- name: Remove cid, pid and service files
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - "{{ cidfile }}"
+    - "{{ pidfile }}"
+    - "{{ service_files_dir }}/{{ service_name }}"
+
+- name: Remove (may) existing local mount dirs 
+  tags: mounts
+  ansible.builtin.file:
+    path: "{{ item.value.host | dirname }}"
+    state: directory
+    recurse: yes
+  loop: "{{ lookup('dict', mounts, wantlist=True) }}"
+  when: mounts is defined 

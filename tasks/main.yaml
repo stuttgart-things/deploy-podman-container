@@ -1,43 +1,48 @@
-- name: Install requirements
-  include: install-requirements.yaml
-  when: run_podman_container|bool
-
-- name: Pull image
-  include: pull-container.yaml
-  when: run_podman_container|bool
-
-- name: Prepare ports 
-  include: prepare-ports.yaml
-  when: run_podman_container|bool
-
-- name: Create pod
-  include: create-pod.yaml
-  when: run_podman_container|bool and pod_name is defined
-
-- name: Prepare envs
-  include: prepare-envs.yaml
-  when: run_podman_container|bool
-
+---
 - name: Prepare mounts
   include: prepare-mounts.yaml
   when: run_podman_container|bool
 
+- name: Remove existing service(s)
+  include: remove-service.yaml
+  when: service_state=='absent'
+
+- name: Install requirements
+  include: install-requirements.yaml
+  when: run_podman_container|bool and service_state=='present'
+
+- name: Pull image
+  include: pull-container.yaml
+  when: run_podman_container|bool and service_state=='present'
+
+- name: Prepare ports 
+  include: prepare-ports.yaml
+  when: run_podman_container|bool and service_state=='present'
+
+- name: Create pod
+  include: create-pod.yaml
+  when: run_podman_container|bool and pod_name is defined and service_state=='present'
+
+- name: Prepare envs
+  include: prepare-envs.yaml
+  when: run_podman_container|bool and service_state=='present'
+
 - name: Generate certificates
   include: "generate-{{ certificate_option }}-certs.yaml"
-  when: generate_certs|bool
+  when: generate_certs|bool and service_state=='present'
 
 - name: Teamplate config file
   include: template-config-file.yaml
-  when: generate_config|bool
+  when: generate_config|bool and service_state=='present'
 
 - name: Run podman container 
   include: run-podman-container.yaml
-  when: run_podman_container|bool
+  when: run_podman_container|bool and service_state=='present'
 
 - name: Stop podman container
   include: stop-podman-container.yaml
-  when: permanent|bool or not run_podman_container
+  when: permanent|bool or not run_podman_container and service_state=='present'
 
 - name: Enable systemd service
   include: deploy-systemd-service.yaml
-  when: permanent|bool
+  when: permanent|bool and service_state=='present'
