@@ -11,7 +11,7 @@
   when: run_podman_container|bool
 
 - name: Create pod
-  include: cerate-pod.yaml
+  include: create-pod.yaml
   when: run_podman_container|bool and pod_name is defined
 
 - name: Prepare envs
