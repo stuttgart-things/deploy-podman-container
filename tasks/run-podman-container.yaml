@@ -13,4 +13,4 @@
 
 - name: get contaner ip 
   shell: |
-    sudo podman inspect -f "{{.NetworkSettings.IPAddress}}" {{ container_name }}
+    'sudo podman inspect -f {% raw %}"{{.NetworkSettings.IPAddress}}"{% endraw %} {{ container_name }}'
