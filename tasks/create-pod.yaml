@@ -4,18 +4,3 @@
     name: "{{ pod_name }}"
     state: created
     share: cgroup,ipc,uts
-
-# # -> prepare ports
-
-# # -> prepare mounts per container
-
-# - name: Add containers to created pod
-#   containers.podman.podman_container:
-#     name: "{{ container_name }}"
-#     image: "{{ container_name }}"
-#     state: "{{ container_name }}"
-#     pod: "{{ pod_name }}"
-#   loop: 
-#     - "{{ containers }}"
-
-# # -> create systemd service
