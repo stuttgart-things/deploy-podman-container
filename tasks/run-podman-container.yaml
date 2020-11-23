@@ -2,6 +2,7 @@
 - name: Run container (if the container should be running permanently - it will be stopped and restarted in a systemd service)
   containers.podman.podman_container:
     name: "{{ container_name }}"
+    pod: "{{ pod_name }}"
     image: "{{ container_image }}"
     state: "{{ state }}"
     recreate: "{{ recreate }}"
@@ -9,3 +10,7 @@
     ports: "{{ port_list }}"
     volumes: "{{ mount_list }}"
     #cmd_args: "{{ container_cmd_args | default(omit) }}"
+
+- name: get contaner ip 
+  shell: |
+    podman inspect -f "{{.NetworkSettings.IPAddress}}" {{ container_name }}
