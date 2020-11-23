@@ -9,8 +9,7 @@
     env: "{{ env_vars_dict }}" 
     ports: "{{ port_list }}"
     volumes: "{{ mount_list }}"
-    #cmd_args: "{{ container_cmd_args | default(omit) }}"
 
-- name: get contaner ip 
-  shell: |
-    'sudo podman inspect -f {% raw %}"{{.NetworkSettings.IPAddress}}"{% endraw %} {{ container_name }}'
+- name: "Gather info about pod {{ pod_name }}"
+  containers.podman.podman_pod_info:
+    name: "{{ pod_name }}"
