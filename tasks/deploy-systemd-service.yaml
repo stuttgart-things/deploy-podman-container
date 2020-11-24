@@ -33,3 +33,12 @@
     enabled: yes
     state: "{{ systemd_state }}"
     daemon_reload: yes
+
+- name: "Gather info about pod {{ pod_name }}"
+  containers.podman.podman_pod_info:
+    name: "{{ pod_name }}"
+  when: pod_name is defined 
+  
+- name: "Gather info about container {{ container_name }}"
+  containers.podman.podman_container_info:
+    name: "{{ container_name }}"
