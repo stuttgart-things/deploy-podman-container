@@ -1,12 +1,4 @@
-- name: Install python requirements
-  include_role:
-    name: install-requirements
-  vars:
-    update_packages: false
-    python_modules: "{{ podman_python_modules }}"
-    os_packages: "{{ podman_os_packages }}"
-  tags: setup
-
+---
 - name: Make sure podman is installed
   include_role:
     name: install-configure-podman
