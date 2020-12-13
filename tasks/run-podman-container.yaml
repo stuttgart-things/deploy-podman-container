@@ -2,7 +2,7 @@
 - name: Run container (if the container should be running permanently - it will be stopped and restarted in a systemd service)
   containers.podman.podman_container:
     name: "{{ container_name }}"
-    pod: "{{ pod_name }}"
+    pod: "{{ pod_name | default(omit) }}"
     image: "{{ container_image }}"
     state: "{{ state }}"
     recreate: "{{ recreate }}"
