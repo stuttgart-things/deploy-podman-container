@@ -7,7 +7,7 @@ Role Requirements / Dependencies
 --------------------------------
 
 ```
-sudo cat <<EOF > ./requirements.yaml
+sudo cat <<EOF > /tmp/requirements.yaml
 roles:
 - src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-configure-podman.git
   scm: git
