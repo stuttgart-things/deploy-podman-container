@@ -21,8 +21,11 @@ roles:
   scm: git
 collections:
 - name: containers.podman
+  version: 1.2.0
 - name: community.general 
+  version: 1.3.4
 - name: ansible.posix
+  version: 1.1.1
 
 EOF
 ansible-galaxy install -r /tmp/requirements.yaml --force && ansible-galaxy collection install -r /tmp/requirements.yaml -f
