@@ -1,4 +1,8 @@
 ---
+- name: Install requirements
+  include: install-requirements.yaml
+  when: run_podman_container|bool and service_state=='present'
+  
 - name: Prepare mounts
   include: prepare-mounts.yaml
   when: run_podman_container|bool
@@ -6,10 +10,6 @@
 - name: Remove existing service(s)
   include: remove-service.yaml
   when: service_state=='absent'
-
-- name: Install requirements
-  include: install-requirements.yaml
-  when: run_podman_container|bool and service_state=='present'
 
 - name: Pull image
   include: pull-container.yaml
