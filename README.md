@@ -1,7 +1,8 @@
 stuttgart-things/deploy-podman-conatiner
 =======================
 
-deploys reboot resistant podman containers.
+deploys podman container (w/ option for permanent) on a target. all requirements will be installed (if not exists).
+
 
 Role Requirements / Dependencies
 --------------------------------
