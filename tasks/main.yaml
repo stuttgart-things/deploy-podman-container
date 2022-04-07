@@ -1,48 +1,48 @@
 ---
 - name: Install requirements
-  include: install-requirements.yaml
+  ansible.builtin.ansible.builtin.include_tasks_tasks: install-requirements.yaml
   when: run_podman_container|bool and service_state=='present'
   
 - name: Prepare mounts
-  include: prepare-mounts.yaml
+  ansible.builtin.include_tasks: prepare-mounts.yaml
   when: run_podman_container|bool
 
 - name: Remove existing service(s)
-  include: remove-service.yaml
+  ansible.builtin.include_tasks: remove-service.yaml
   when: service_state=='absent'
 
 - name: Pull image
-  include: pull-container.yaml
+  ansible.builtin.include_tasks: pull-container.yaml
   when: run_podman_container|bool and service_state=='present'
 
 - name: Prepare ports 
-  include: prepare-ports.yaml
+  ansible.builtin.include_tasks: prepare-ports.yaml
   when: run_podman_container|bool and service_state=='present'
 
 - name: Create pod
-  include: create-pod.yaml
+  ansible.builtin.include_tasks: create-pod.yaml
   when: run_podman_container|bool and pod_name is defined and service_state=='present'
 
 - name: Prepare envs
-  include: prepare-envs.yaml
+  ansible.builtin.include_tasks: prepare-envs.yaml
   when: run_podman_container|bool and service_state=='present'
 
 - name: Generate certificates
-  include: "generate-{{ certificate_option }}-certs.yaml"
+  ansible.builtin.include_tasks: "generate-{{ certificate_option }}-certs.yaml"
   when: generate_certs|bool and service_state=='present'
 
 - name: Teamplate config file
-  include: template-config-file.yaml
+  ansible.builtin.include_tasks: template-config-file.yaml
   when: generate_config|bool and service_state=='present'
 
 - name: Run podman container 
-  include: run-podman-container.yaml
+  ansible.builtin.include_tasks: run-podman-container.yaml
   when: run_podman_container|bool and service_state=='present'
 
 - name: Stop podman container
-  include: stop-podman-container.yaml
+  ansible.builtin.include_tasks: stop-podman-container.yaml
   when: permanent|bool or not run_podman_container and service_state=='present'
 
 - name: Enable systemd service
-  include: deploy-systemd-service.yaml
+  ansible.builtin.include_tasks: deploy-systemd-service.yaml
   when: permanent|bool and service_state=='present'
