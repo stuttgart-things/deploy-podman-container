@@ -1,6 +1,6 @@
 ---
 - name: Install requirements
-  ansible.builtin.ansible.builtin.include_tasks_tasks: install-requirements.yaml
+  ansible.builtin.include_tasks: install-requirements.yaml
   when: run_podman_container|bool and service_state=='present'
   
 - name: Prepare mounts
