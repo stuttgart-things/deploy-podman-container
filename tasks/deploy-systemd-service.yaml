@@ -7,7 +7,7 @@
   ansible.builtin.service:
     name: "{{ service_name }}"
     state: stopped
-    enabled: no
+    enabled: false
   when:
     - service_file_before_template.stat.exists
 
@@ -30,15 +30,15 @@
 - name: "Ensure service is enabled at boot, and systemd reloaded"
   ansible.builtin.systemd:
     name: "{{ service_name }}"
-    enabled: yes
+    enabled: true
     state: "{{ systemd_state }}"
-    daemon_reload: yes
+    daemon_reload: true
 
 - name: "Gather info about pod {{ pod_name }}"
   containers.podman.podman_pod_info:
     name: "{{ pod_name }}"
   when: pod_name is defined 
-  
+
 - name: "Gather info about container {{ container_name }}"
   containers.podman.podman_container_info:
     name: "{{ container_name }}"
