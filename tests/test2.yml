@@ -3,8 +3,8 @@
   become: true
   roles:
     - role: deploy-podman-container
-      vars: 
-        permanent: false 
+      vars:
+        permanent: false
         container_name: poc-registry
         container_image: docker.io/library/registry:2
         container_run_args: >-
@@ -34,7 +34,7 @@
             value: '"ALongRandomSecretForRegistry"'
           registry_http_tls_cert:
             key: '"REGISTRY_AUTH_HTPASSWD_REALM"'
-            value: '"Registry"' 
+            value: '"Registry"'
           registry_auth_htpasswd_path:
             key: '"REGISTRY_AUTH"'
             value: '"htpasswd"'
