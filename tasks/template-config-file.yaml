@@ -3,4 +3,4 @@
   template:
     src: "{{ config_template }}"
     dest: "{{ config_mount_target }}"
-    backup: yes
+    backup: true

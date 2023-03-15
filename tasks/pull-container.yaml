@@ -1,5 +1,5 @@
 ---
-- name: "Trying to pull {{ container_image }}" 
+- name: "Trying to pull {{ container_image }}"
   containers.podman.podman_image:
     name: "{{ container_image }}"
     username: "{{ registry_user | default(omit) }}"

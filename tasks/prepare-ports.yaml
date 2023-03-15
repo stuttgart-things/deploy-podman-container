@@ -1,7 +1,7 @@
 - name: Calculate list of ports to launch container
   vars:
     current_port: "{{ item.value.host }}:{{ item.value.container }}"
-  set_fact:
+  ansible.builtin.set_fact:
     port_list: "{{ port_list | default([]) + [current_port] }}"
   loop: "{{ lookup('dict', ports, wantlist=True) }}"
   when: ports is defined and ports.values()|length > 0
@@ -10,13 +10,13 @@
   ansible.builtin.set_fact:
     port_list: null
   when: ports is defined and ports.values()|length <= 0
-  
+
 - name: Ensure container's exposed ports firewall state
   tags: firewall
   ansible.posix.firewalld:
     port: "{{ item.value.host }}/tcp"
-    permanent: yes
-    immediate: yes
+    permanent: true
+    immediate: true
     state: enabled
   loop: "{{ lookup('dict', ports, wantlist=True) }}"
   when: ports is defined and ansible_os_family == 'RedHat'

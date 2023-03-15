@@ -16,7 +16,7 @@
   ansible.builtin.file:
     path: "{{ item.value.host | dirname }}"
     state: directory
-    recurse: yes
+    recurse: true
   loop: "{{ lookup('dict', mounts, wantlist=True) }}"
   when: mounts is defined and service_state=='present'
 

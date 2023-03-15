@@ -1,4 +1,4 @@
-- name: Generate self-signed ssl certificates 
+- name: Generate self-signed ssl certificates
   ansible.builtin.include_role:
     name: generate-selfsigned-certs
   vars:
