@@ -1,5 +1,5 @@
-- name: generate ssl certificates by vault
-  include_role:
+- name: Generate ssl certificates by vault
+  ansible.builtin.include_role:
     name: install-configure-vault
   vars:
     vault_ca_cert_role_name: "{{ vault_role_name }}"

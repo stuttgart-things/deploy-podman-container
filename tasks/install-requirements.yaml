@@ -1,5 +1,5 @@
 ---
 - name: Make sure podman is installed
-  include_role:
+  ansible.builtin.include_role:
     name: install-configure-podman
   tags: setup

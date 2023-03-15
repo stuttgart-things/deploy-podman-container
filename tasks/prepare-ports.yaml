@@ -11,7 +11,7 @@
     port_list: null
   when: ports is defined and ports.values()|length <= 0
   
-- name: ensure container's exposed ports firewall state
+- name: Ensure container's exposed ports firewall state
   tags: firewall
   ansible.posix.firewalld:
     port: "{{ item.value.host }}/tcp"
@@ -21,7 +21,7 @@
   loop: "{{ lookup('dict', ports, wantlist=True) }}"
   when: ports is defined and ansible_os_family == 'RedHat'
 
-- name: ensure container's exposed ports firewall state
+- name: Ensure container's exposed ports firewall state
   tags: firewall
   community.general.ufw:
     rule: allow
