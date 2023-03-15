@@ -10,15 +10,15 @@ Role Requirements / Dependencies
 ```
 sudo cat <<EOF > /tmp/requirements.yaml
 roles:
-- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-configure-podman.git
+- src: https://github.com/stuttgart-things/install-configure-podman.git
   scm: git
-- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-configure-vault.git
+- src: https://github.com/stuttgart-things/install-configure-vault.git
   scm: git
-- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/deploy-podman-container.git
+- src: https://github.com/stuttgart-things/deploy-podman-container.git
   scm: git
-- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-requirements.git
+- src: https://github.com/stuttgart-things/install-requirements.git
   scm: git
-- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/generate-selfsigned-certs.git
+- src: https://github.com/stuttgart-things/generate-selfsigned-certs.git
   scm: git
 collections:
 - name: containers.podman
@@ -107,6 +107,6 @@ BSD
 Author Information
 ------------------
 
-Patrick Hermann (patrick.hermann@sva.de), SVA GmbH, 07/2020.
+Patrick Hermann (patrick.hermann@sva.de), Stuttgart-Things, 07/2020.
 
 this role is heavily influenced by [podman-container-systemd](https://github.com/ikke-t/podman-container-systemd) - we didnt like the style of the role and for a better understanding for podman from a technology side, we're still in the process to rewrite/implement a similar role. 
