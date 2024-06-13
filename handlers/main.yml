@@ -1,15 +1,15 @@
 ---
 # handlers file for deploy-podman-container
-- name: reload systemctl
-  systemd:
-    daemon_reload: yes
+- name: Reload systemctl
+  ansible.builtin.systemd:
+    daemon_reload: true
 
-- name: start service
-  systemd:
+- name: Start service
+  ansible.builtin.systemd:
     name: "{{ service_name }}"
     state: started
 
-- name: restart service
-  systemd:
+- name: Restart service
+  ansible.builtin.systemd:
     name: "{{ service_name }}"
     state: restarted

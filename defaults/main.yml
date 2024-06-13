@@ -7,15 +7,15 @@ podman_os_packages:
 podman_python_modules:
   - name: pyyaml
   - name: selinux
-  
+
 # user
 container_run_as_user: root
 container_run_as_group: root
 
-# systemd service 
+# systemd service
 service_files_dir: /etc/systemd/system
 service_name: "{{ container_name }}-container-pod.service"
-systemd_state: "{% if run_podman_container|bool %}started{% elif not run_podman_container %}stopped{% endif %}"
+systemd_state: "{% if run_podman_container | bool %}started{% elif not run_podman_container %}stopped{% endif %}"
 systemd_TimeoutStartSec: 15
 systemd_RestartSec: 30
 cidfile: "/tmp/{{ service_name }}.cid"
@@ -26,9 +26,9 @@ container_restart: on-failure
 container_stop_timeout: 15
 restart_policy: always
 state: present
-recreate: yes
+recreate: true
 run_podman_container: true
-ignore_errors: false 
+container_ignore_errors: false
 
 
 #certs

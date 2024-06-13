@@ -1,3 +1,4 @@
+---
 - name: Check if service file is already existing
   ansible.builtin.stat:
     path: "{{ service_files_dir }}/{{ service_name }}"

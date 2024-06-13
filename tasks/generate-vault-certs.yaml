@@ -1,3 +1,4 @@
+---
 - name: Generate ssl certificates by vault
   ansible.builtin.include_role:
     name: install-configure-vault

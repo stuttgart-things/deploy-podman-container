@@ -2,7 +2,7 @@
 - name: Install requirements
   ansible.builtin.include_tasks: install-requirements.yaml
   when: run_podman_container|bool and service_state=='present'
-  
+
 - name: Prepare mounts
   ansible.builtin.include_tasks: prepare-mounts.yaml
   when: run_podman_container|bool
@@ -15,7 +15,7 @@
   ansible.builtin.include_tasks: pull-container.yaml
   when: run_podman_container|bool and service_state=='present'
 
-- name: Prepare ports 
+- name: Prepare ports
   ansible.builtin.include_tasks: prepare-ports.yaml
   when: run_podman_container|bool and service_state=='present'
 
@@ -35,7 +35,7 @@
   ansible.builtin.include_tasks: template-config-file.yaml
   when: generate_config|bool and service_state=='present'
 
-- name: Run podman container 
+- name: Run podman container
   ansible.builtin.include_tasks: run-podman-container.yaml
   when: run_podman_container|bool and service_state=='present'
 

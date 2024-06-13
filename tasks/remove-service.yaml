@@ -15,11 +15,11 @@
     - "{{ pidfile }}"
     - "{{ service_files_dir }}/{{ service_name }}"
 
-- name: Remove (may) existing local mount dirs 
+- name: Remove (may) existing local mount dirs
   tags: mounts
   ansible.builtin.file:
     path: "{{ item.value.host | dirname }}"
     state: directory
     recurse: true
   loop: "{{ lookup('dict', mounts, wantlist=True) }}"
-  when: mounts is defined 
+  when: mounts is defined

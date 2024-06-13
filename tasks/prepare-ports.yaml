@@ -1,3 +1,4 @@
+---
 - name: Calculate list of ports to launch container
   vars:
     current_port: "{{ item.value.host }}:{{ item.value.container }}"
