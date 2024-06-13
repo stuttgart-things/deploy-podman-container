@@ -27,6 +27,7 @@ container_stop_timeout: 15
 restart_policy: always
 state: present
 recreate: true
+container_init: true
 run_podman_container: true
 container_ignore_errors: false
 

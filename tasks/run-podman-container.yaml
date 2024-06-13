@@ -9,4 +9,5 @@
     recreate: "{{ recreate }}"
     env: "{{ env_vars_dict }}"
     ports: "{{ port_list }}"
+    init: "{{ container_init }}"
     volumes: "{{ mount_list }}"
