@@ -1,6 +1,7 @@
+---
 - name: Calculate list of env_vars to launch container
   ansible.builtin.set_fact:
-    env_vars_dict: "{{ env_vars_dict|default({}) | combine( {item.value.key | upper: item.value.value} ) }}"
+    env_vars_dict: "{{ env_vars_dict | default({}) | combine({item.value.key | upper: item.value.value}) }}"
   loop: "{{ lookup('dict', env_vars, wantlist=True) }}"
 
 - name: Set env_vars_dict to null if no env vars are given

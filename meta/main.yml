@@ -1,3 +1,4 @@
+---
 galaxy_info:
   author: Patrick Hermann
   description: deploys reboot resistant podman containers. this role is heavily influenced by [podman-container-systemd](https://github.com/ikke-t/podman-container-systemd) - we didnt like the style of the role and for a better understanding for podman from a technology side, we're still in the process to rewrite/implement a similar role.

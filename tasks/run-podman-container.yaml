@@ -7,6 +7,7 @@
     image: "{{ container_image }}"
     state: "{{ state }}"
     recreate: "{{ recreate }}"
-    env: "{{ env_vars_dict }}" 
+    env: "{{ env_vars_dict }}"
     ports: "{{ port_list }}"
+    init: "{{ container_init }}"
     volumes: "{{ mount_list }}"

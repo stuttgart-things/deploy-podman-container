@@ -1,6 +1,7 @@
 ---
 - name: Create config from template
-  template:
+  ansible.builtin.template:
     src: "{{ config_template }}"
     dest: "{{ config_mount_target }}"
     backup: true
+    mode: 0644
